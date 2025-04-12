@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5050;
 connectDB();
 
 const corsOptions = {
-  origin: "http://13.234.200.213:5050",
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 };
