@@ -26,12 +26,10 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 
 // Serve static frontend files
-const __dirnamePath = path.resolve();
-app.use(express.static(path.join(__dirnamePath, 'Frontend', 'my-react-app', 'dist')));
-
-// Catch-all to serve React app on refresh
+const __dirnamePath = path.resolve(__dirname, '../Frontend/my-react-app/dist');
+app.use(express.static(__dirnamePath));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirnamePath, 'Frontend', 'my-react-app', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirnamePath, 'index.html'));
 });
 
 // Start the server on all IPs at port 5050
