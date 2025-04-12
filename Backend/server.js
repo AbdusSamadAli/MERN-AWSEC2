@@ -13,7 +13,7 @@ connectDB();
 
 // Enable CORS for all origins
 const corsOptions = {
-  origin: 'http://13.234.200.213:5050',
+  origin: ['http://13.234.200.213:5050', 'http://13.234.200.213:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 };
