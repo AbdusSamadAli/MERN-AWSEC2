@@ -7,7 +7,6 @@ const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 const app = express();
-const PORT = 5050;
 
 connectDB();
 
@@ -25,11 +24,10 @@ app.use('/api/auth', authRoutes);
 
 // Serve frontend
 const __dirnamePath = path.resolve();
-app.use(express.static(path.join(__dirnamePath, 'client')));
+app.use(express.static(path.join(__dirnamePath, 'client', 'build')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirnamePath, 'client', 'index.html'));
+  res.sendFile(path.join(__dirnamePath, 'client', 'build', 'index.html'));
 });
-
 // Start the server
 app.listen(5050, '0.0.0.0', () => console.log("Running on 0.0.0.0:5050"));
