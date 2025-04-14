@@ -1,0 +1,15 @@
+version: 0.0
+os: linux
+files:
+  - source: Backend/
+    destination: /home/ubuntu/MERN-AWSEC2/Backend
+
+hooks:
+  AfterInstall:
+    - location: Backend/scripts/install.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStart:
+    - location: Backend/scripts/start.sh
+      timeout: 300
+      runas: ubuntu
