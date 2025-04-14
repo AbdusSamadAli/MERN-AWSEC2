@@ -27,7 +27,7 @@ phases:
 
   post_build:
     commands:
-      - echo "Post-Build Phase: Build completed successfully."
+      - echo "Build completed successfully."
       - echo "Listing all contents after build phase:"
       - ls -la
 
