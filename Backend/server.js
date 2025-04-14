@@ -22,6 +22,10 @@ app.use(cors(corsOptions));
 // Parse incoming JSON
 app.use(express.json());
 
+app.get('/health', (req, res) => {
+  res.status(200).send('Healthy');
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 
@@ -31,9 +35,7 @@ app.use(express.static(__dirnamePath));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirnamePath, 'index.html'));
 });
-app.get('/health', (req, res) => {
-  res.status(200).send('Healthy');
-});
+
 // Start the server on all IPs at port 5050
 app.listen(5050, '0.0.0.0', () => {
   console.log('✅ Server running at http://13.234.200.213:5050');
