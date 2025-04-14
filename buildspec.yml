@@ -3,22 +3,40 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo "Starting Install Phase..."
+      
+      # Check current working directory and debug
+      - echo "Current working directory:"
+      - pwd
+      - echo "Listing root directory contents:"
+      - ls -la
+
+      # Backend dependency installation
       - echo "Installing backend dependencies..."
-      - cd Backend || exit 1
+      - if [ -d "Backend" ]; then cd Backend; else echo "Backend folder not found"; exit 1; fi
       - npm install || exit 1
       - cd .. || exit 1
+
+      # Frontend dependency installation
       - echo "Installing frontend dependencies..."
-      - if [ -d "Frontend/my-react-app" ]; then cd Frontend/my-react-app; else echo "Folder not found"; exit 1; fi
+      - echo "Checking Frontend directory..."
+      - ls -la Frontend || exit 1
+      - if [ -d "Frontend/my-react-app" ]; then cd Frontend/my-react-app; else echo "Frontend/my-react-app folder not found"; exit 1; fi
       - npm install || exit 1
 
   build:
     commands:
+      - echo "Starting Build Phase..."
       - echo "Building frontend..."
       - npm run build || exit 1
 
   post_build:
     commands:
-      - echo "Build completed successfully."
+      - echo "Post-Build Phase: Build completed successfully."
+      - echo "Current directory after build phase:"
+      - pwd
+      - echo "Listing all contents after build phase:"
+      - ls -la
 
 artifacts:
   files:
