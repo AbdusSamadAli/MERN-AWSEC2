@@ -13,23 +13,23 @@ phases:
 
       # Backend dependency installation
       - echo "Installing backend dependencies..."
-      - if [ -d "Backend" ]; then cd Backend; else echo "Backend folder not found"; exit 1; fi
-      - npm install || exit 1
+      - if [ -d "/home/ubuntu/MERN-AWSEC2/Backend" ]; then cd /home/ubuntu/MERN-AWSEC2/Backend; else echo "Backend folder not found"; exit 1; fi
+      - npm install || { echo "npm install failed for Backend"; exit 1; }
       - cd .. || exit 1
 
       # Frontend dependency installation
       - echo "Installing frontend dependencies..."
       - echo "Checking Frontend directory..."
-      - ls -la Frontend || exit 1
-      - if [ -d "Frontend/my-react-app" ]; then cd Frontend/my-react-app; else echo "Frontend/my-react-app folder not found"; exit 1; fi
-      - npm install || exit 1
+      - ls -la /home/ubuntu/MERN-AWSEC2/Frontend || exit 1
+      - if [ -d "/home/ubuntu/MERN-AWSEC2/Frontend/my-react-app" ]; then cd /home/ubuntu/MERN-AWSEC2/Frontend/my-react-app; else echo "Frontend/my-react-app folder not found"; exit 1; fi
+      - npm install || { echo "npm install failed for Frontend"; exit 1; }
 
   build:
     commands:
       - echo "Starting Build Phase..."
       - echo "Building frontend..."
-      - cd Frontend/my-react-app || exit 1 # Ensure we're in the frontend directory
-      - npm run build || exit 1
+      - cd /home/ubuntu/MERN-AWSEC2/Frontend/my-react-app || exit 1
+      - npm run build || { echo "npm run build failed for Frontend"; exit 1; }
       - echo "Frontend build completed successfully."
 
   post_build:
@@ -43,5 +43,6 @@ phases:
 artifacts:
   files:
     - '**/*'
+
 
 
