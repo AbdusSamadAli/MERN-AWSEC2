@@ -3,6 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo "Checking if MERN-AWSEC2 directory exists..."
       - echo "Checking Backend directory..."
       - ls -la /home/ubuntu/MERN-AWSEC2 || { echo "MERN-AWSEC2 directory not found"; exit 1; }
       - ls -la /home/ubuntu/MERN-AWSEC2/Backend || { echo "Backend folder not found"; exit 1; }
