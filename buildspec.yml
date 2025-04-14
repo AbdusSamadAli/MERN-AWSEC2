@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - echo Installing backend dependencies...
+      - cd Backend
+      - npm install
+      - echo Installing frontend dependencies...
+      - cd Frontend/my-react-app
+      - npm install
+  build:
+    commands:
+      - echo Building React frontend...
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed.
+
+artifacts:
+  files:
+    - appspec.yml
+    - Backend/**/*
+    - Backend/Frontend/my-react-app/dist/**/*  =
+  discard-paths: no
