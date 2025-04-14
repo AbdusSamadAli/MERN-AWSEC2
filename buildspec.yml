@@ -5,10 +5,10 @@ phases:
     commands:
       - echo "Starting Install Phase..."
       
-      # Check current working directory and debug
+      # Debugging directory and listing contents
       - echo "Current working directory:"
       - pwd
-      - echo "Listing root directory contents:"
+      - echo "Contents of the root directory:"
       - ls -la
 
       # Backend dependency installation
@@ -28,7 +28,9 @@ phases:
     commands:
       - echo "Starting Build Phase..."
       - echo "Building frontend..."
+      - cd Frontend/my-react-app || exit 1 # Ensure we're in the frontend directory
       - npm run build || exit 1
+      - echo "Frontend build completed successfully."
 
   post_build:
     commands:
@@ -41,4 +43,5 @@ phases:
 artifacts:
   files:
     - '**/*'
+
 
