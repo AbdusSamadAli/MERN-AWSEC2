@@ -9,12 +9,10 @@ phases:
       - echo "Contents of the root directory:"
       - ls -la
 
-      # Backend dependency installation
       - echo "Installing backend dependencies..."
       - if [ -d "/home/ubuntu/MERN-AWSEC2/Backend" ]; then cd /home/ubuntu/MERN-AWSEC2/Backend; else echo "Backend folder not found"; exit 1; fi
       - npm install || { echo "npm install failed for Backend"; exit 1; }
 
-      # Frontend dependency installation
       - echo "Installing frontend dependencies..."
       - if [ -d "/home/ubuntu/MERN-AWSEC2/Frontend/my-react-app" ]; then cd /home/ubuntu/MERN-AWSEC2/Frontend/my-react-app; else echo "Frontend/my-react-app folder not found"; exit 1; fi
       - npm install || { echo "npm install failed for Frontend"; exit 1; }
@@ -34,7 +32,3 @@ phases:
 artifacts:
   files:
     - '**/*'
-
-
-
-
