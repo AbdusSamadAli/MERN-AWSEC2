@@ -37,6 +37,10 @@ jobs:
             npm run build
             cd ../..
 
+            echo "📦 Moving new build to backend..."
+            rm -rf Backend/public
+            cp -r Frontend/my-react-app/build Backend/public
+
             echo "🔁 Restarting backend using PM2..."
             pm2 restart mern-app
 
