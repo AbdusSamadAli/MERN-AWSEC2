@@ -5,8 +5,6 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "Current working directory: $(pwd)"
-      - ls -la
       - echo "Running install.sh script..."
       - cd Backend/scripts
       - chmod +x install.sh
@@ -21,10 +19,10 @@ phases:
 
   post_build:
     commands:
-      - echo "Running script.sh script..."
+      - echo "Running start.sh script..."
       - cd ../../Backend/scripts
-      - chmod +x script.sh
-      - ./script.sh
+      - chmod +x start.sh
+      - ./start.sh
 
 artifacts:
   files:
