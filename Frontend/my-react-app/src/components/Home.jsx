@@ -10,7 +10,7 @@ function Home() {
       <div className="mt-4 flex space-x-4">
         <Link to="/signup">
           <button className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-            Signup
+            Signup Now!
           </button>
         </Link>
         <Link to="/login">
