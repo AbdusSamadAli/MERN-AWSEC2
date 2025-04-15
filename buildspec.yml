@@ -5,10 +5,12 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "Installing backend dependencies..."
+      - echo "Listing root directory..."
+      - ls -la
+      - echo "Navigating to Frontend/my-react-app..."
+      - ls -la Frontend || { echo "Frontend directory not found"; exit 1; }
+      - ls -la Frontend/my-react-app || { echo "my-react-app directory not found"; exit 1; }
       - cd Backend && npm install
-
-      - echo "Installing frontend dependencies..."
       - cd ../Frontend/my-react-app && npm install
 
   build:
