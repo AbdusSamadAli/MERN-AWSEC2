@@ -5,20 +5,26 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      - echo "Current working directory: $(pwd)"
+      - ls -la
       - echo "Running install.sh script..."
-      - chmod +x scripts/install.sh
-      - ./scripts/install.sh
+      - cd Backend/scripts
+      - chmod +x install.sh
+      - ./install.sh
 
   build:
     commands:
       - echo "Building the frontend..."
-      - cd Frontend/my-react-app && npm run build
+      - cd ../../Frontend/my-react-app
+      - npm install
+      - npm run build
 
   post_build:
     commands:
       - echo "Running script.sh script..."
-      - chmod +x scripts/script.sh
-      - ./scripts/script.sh
+      - cd ../../Backend/scripts
+      - chmod +x script.sh
+      - ./script.sh
 
 artifacts:
   files:
