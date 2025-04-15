@@ -37,7 +37,7 @@ jobs:
             npm run build
             cd ../..
 
-            echo "📦 Moving new build to Backend/public"
+            echo "📦 Moving new build to backend public folder..."
             rm -rf Backend/public
             cp -r Frontend/my-react-app/build Backend/public
 

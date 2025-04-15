@@ -22,10 +22,6 @@ app.use(cors(corsOptions));
 // Parse incoming JSON
 app.use(express.json());
 
-app.get('/health', (req, res) => {
-  res.status(200).send('Healthy');
-});
-
 // API Routes
 app.use('/api/auth', authRoutes);
 
