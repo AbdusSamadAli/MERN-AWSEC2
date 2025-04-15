@@ -1,4 +1,5 @@
 🚀 MERN Stack Application with CI/CD on AWS
+
 This project is built to strengthen DevOps skills by deploying a MERN (MongoDB, Express, React, Node.js) application on an AWS EC2 instance using a fully automated CI/CD pipeline powered by GitHub Actions.
 
 🛠️ Project Highlights:
