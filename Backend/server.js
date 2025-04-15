@@ -13,7 +13,7 @@ connectDB();
 
 // Enable CORS for all origins
 const corsOptions = {
-  origin: ['http://13.234.200.213:5050', 'http://13.234.200.213:3000','http://mern-alb-1070545022.ap-south-1.elb.amazonaws.com'],
+  origin: ['http://13.234.200.213:5050', 'http://13.234.200.213:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 };
@@ -29,8 +29,7 @@ app.get('/health', (req, res) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 
-// Serve static frontend files
-const __dirnamePath = path.resolve(__dirname, '../Frontend/my-react-app/dist');
+const __dirnamePath = path.resolve(__dirname, 'public');
 app.use(express.static(__dirnamePath));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirnamePath, 'index.html'));
