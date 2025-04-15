@@ -1,33 +1,48 @@
- name: Deploy to EC2
-  uses: appleboy/ssh-action@master
-  with:
-    host: ${{ secrets.EC2_HOST }}
-    username: ${{ secrets.EC2_USER }}
-    key: ${{ secrets.EC2_KEY }}
-    script: |
-      echo "🚀 Starting deployment..."
-      cd ~/MERN-AWSEC2
+name: Deploy to EC2
 
-      echo "📥 Pulling latest code..."
-      git config pull.rebase false
-      git pull origin main
+on:
+  push:
+    branches:
+      - main
 
-      echo "📦 Installing backend dependencies..."
-      cd Backend
-      npm install
-      cd ..
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-      echo "⚛️ Building React frontend..."
-      cd Frontend/my-react-app
-      npm install
-      npm run build
-      cd ../..
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      echo "📦 Moving new build to backend public folder..."
-      rm -rf Backend/public
-      cp -r Frontend/my-react-app/dist Backend/public
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            echo "🚀 Starting deployment..."
+            cd ~/MERN-AWSEC2
 
-      echo "🔁 Restarting backend using PM2..."
-      pm2 restart mern-app
+            echo "📥 Pulling latest code..."
+            git config pull.rebase false
+            git pull origin main
 
-      echo "✅ Deployment successful!"
+            echo "📦 Installing backend dependencies..."
+            cd Backend
+            npm install
+            cd ..
+
+            echo "⚛️ Building React frontend..."
+            cd Frontend/my-react-app
+            npm install
+            npm run build
+            cd ../..
+
+            echo "📦 Moving new build to backend public folder..."
+            rm -rf Backend/public
+            cp -r Frontend/my-react-app/dist Backend/public
+
+            echo "🔁 Restarting backend using PM2..."
+            pm2 restart mern-app
+
+            echo "✅ Deployment successful!"
