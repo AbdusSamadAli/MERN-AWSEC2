@@ -1,4 +1,4 @@
-name: Deploy MERN App to EC2
+name: Deploy to EC2
 
 on:
   push:
@@ -11,24 +11,33 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+        uses: actions/checkout@v2
 
       - name: Deploy to EC2
-        run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            cd /home/ubuntu/MERN-AWSEC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            echo "🚀 Starting deployment..."
+            cd ~/MERN-AWSEC2
+
+            echo "📥 Pulling latest code..."
             git pull origin main
+
+            echo "📦 Installing backend dependencies..."
             cd Backend
             npm install
-            pm2 restart mern-app
-            cd ../Frontend/my-react-app
+            cd ..
+
+            echo "⚛️ Building React frontend..."
+            cd Frontend/my-react-app
             npm install
             npm run build
-          EOF
+            cd ../..
+
+            echo "🔁 Restarting backend using PM2..."
+            pm2 restart mern-app
+
+            echo "✅ Deployment successful!"
