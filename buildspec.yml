@@ -5,23 +5,20 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "Listing root directory..."
-      - ls -la
-      - echo "Navigating to Frontend/my-react-app..."
-      - ls -la Frontend || { echo "Frontend directory not found"; exit 1; }
-      - ls -la Frontend/my-react-app || { echo "my-react-app directory not found"; exit 1; }
-      - cd Backend && npm install
-      - cd ../Frontend/my-react-app && npm install
+      - echo "Running install.sh script..."
+      - chmod +x scripts/install.sh
+      - ./scripts/install.sh
 
   build:
     commands:
-      - echo "Building frontend..."
+      - echo "Building the frontend..."
       - cd Frontend/my-react-app && npm run build
 
   post_build:
     commands:
-      - echo "Build completed successfully."
-      # Optional: Upload to S3 or SSH to EC2 here
+      - echo "Running script.sh script..."
+      - chmod +x scripts/script.sh
+      - ./scripts/script.sh
 
 artifacts:
   files:
