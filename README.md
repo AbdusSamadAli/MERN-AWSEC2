@@ -27,4 +27,3 @@ Moves the build to the backend's public directory
 
 Restarts the Node.js server using PM2
 
-This setup mimics real-world continuous deployment practices, replacing AWS CodePipeline/CodeBuild complexity with a simpler, more developer-friendly workflow
