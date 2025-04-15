@@ -15,7 +15,7 @@ function Home() {
         </Link>
         <Link to="/login">
           <button className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
-            Login
+            Login Now!
           </button>
         </Link>
       </div>
