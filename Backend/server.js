@@ -7,11 +7,8 @@ const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 const app = express();
-
-// Connect to MongoDB
 connectDB();
 
-// Enable CORS for all origins
 const corsOptions = {
   origin: ['http://13.234.200.213:5050', 'http://13.234.200.213:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -19,10 +16,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Parse incoming JSON
 app.use(express.json());
-
-// API Routes
 app.use('/api/auth', authRoutes);
 
 const __dirnamePath = path.resolve(__dirname, 'public');
@@ -31,7 +25,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirnamePath, 'index.html'));
 });
 
-// Start the server on all IPs at port 5050
 app.listen(5050, '0.0.0.0', () => {
   console.log('✅ Server running at http://13.234.200.213:5050');
 });
