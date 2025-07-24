@@ -20,29 +20,29 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            echo "🚀 Starting deployment..."
+            echo "Starting deployment..."
             cd ~/MERN-AWSEC2
 
-            echo "📥 Pulling latest code..."
+            echo "Pulling latest code..."
             git config pull.rebase false
             git pull origin main
 
-            echo "📦 Installing backend dependencies..."
+            echo "Installing backend dependencies..."
             cd Backend
             npm install
             cd ..
 
-            echo "⚛️ Building React frontend..."
+            echo "Building React frontend..."
             cd Frontend/my-react-app
             npm install
             npm run build
             cd ../..
 
-            echo "📦 Moving new build to backend public folder..."
+            echo "Moving new build to backend public folder..."
             rm -rf Backend/public
             cp -r Frontend/my-react-app/dist Backend/public
 
-            echo "🔁 Restarting backend using PM2..."
+            echo "Restarting backend using PM2..."
             pm2 restart mern-app
 
-            echo "✅ Deployment successful!"
+            echo "Deployment successful!"
